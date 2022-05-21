@@ -7,11 +7,13 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
   styleUrls: ['./user-dialog.component.scss']
 })
 export class UserDialogComponent  {
-  user:any = {};
+  user:any = {address:{street:''}};
   constructor(
     public dialogRef: MatDialogRef<UserDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
-      this.user = data? data : {};
+      if (data) {
+        this.user = data
+      }
     }
 
   onNoClick(): void {

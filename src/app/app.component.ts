@@ -47,7 +47,7 @@ export class AppComponent {
       data: user
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result:any) => {
       console.log('result -', result);
       if (result.action == 'add') {
         this.userService.setUser(result.data)
