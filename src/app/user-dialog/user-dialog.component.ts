@@ -7,9 +7,19 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
   styleUrls: ['./user-dialog.component.scss']
 })
 export class UserDialogComponent  {
-
+  user:any = {};
   constructor(
     public dialogRef: MatDialogRef<UserDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {}
+    @Inject(MAT_DIALOG_DATA) public data: any) {
+      this.user = data? data : {};
+    }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+  onSubmit() :void {
+    this.dialogRef.close({action:this.user.id?'edit':'add', data:this.user});
+  }
 
 }

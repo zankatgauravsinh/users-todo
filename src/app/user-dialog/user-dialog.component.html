@@ -1,1 +1,18 @@
-<p>user-dialog works!</p>
+<div mat-dialog-content>
+    <mat-form-field>
+      <input matInput [(ngModel)]="user.name" placeholder="Name">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [(ngModel)]="user.email" placeholder="Email">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [(ngModel)]="user.phone" placeholder="Phone">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [(ngModel)]="user.address" placeholder="address">
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Cancel</button>
+    <button mat-button (click)="onSubmit()" cdkFocusInitial>{{user.id? 'Update' : 'Save'}}</button>
+  </div>
