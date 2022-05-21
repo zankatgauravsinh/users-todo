@@ -21,7 +21,7 @@ export class UserDialogComponent  {
   }
 
   onSubmit() :void {
-    this.dialogRef.close({action:this.user.id?'edit':'add', data:this.user});
+    this.dialogRef.close({action:this.user._id?'edit':'add', data:this.user});
   }
 
 }

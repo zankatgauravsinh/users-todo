@@ -3,10 +3,10 @@
       <input matInput [(ngModel)]="user.name" placeholder="Name">
     </mat-form-field>
     <mat-form-field>
-      <input matInput [(ngModel)]="user.email" placeholder="Email">
+      <input matInput type="email" [(ngModel)]="user.email" placeholder="Email">
     </mat-form-field>
     <mat-form-field>
-      <input matInput [(ngModel)]="user.phone" placeholder="Phone">
+      <input matInput type="number" [(ngModel)]="user.phone" placeholder="Phone">
     </mat-form-field>
     <mat-form-field>
       <input matInput [(ngModel)]="user.address.street" placeholder="address">
@@ -14,5 +14,5 @@
   </div>
   <div mat-dialog-actions>
     <button mat-button (click)="onNoClick()">Cancel</button>
-    <button mat-button (click)="onSubmit()" cdkFocusInitial>{{user.id? 'Update' : 'Save'}}</button>
+    <button *ngIf="!user._id" mat-button (click)="onSubmit()" cdkFocusInitial>Save</button>
   </div>

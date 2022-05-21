@@ -1,9 +1,19 @@
 
-<section>
-  <h2>Users</h2>
+<section  *transloco="let t">
+  <h2 i18n>{{ t('header') }}</h2>
   <div class="main">
     <div>
-      <button mat-raised-button color="primary" (click)="AddeditUser(null)">Add User</button>
+      <div class="btns">
+        <button mat-raised-button color="primary" (click)="AddeditUser(null)" i18n>{{ t('btn') }}</button>
+        <mat-form-field appearance="fill">
+          <mat-label i18n> {{ t('language') }} </mat-label>
+          <mat-select (selectionChange)="changeLang($event)">
+            <mat-option value="en">English</mat-option>
+            <mat-option value="es">Spanish</mat-option>
+            <mat-option value="eh" >Hindi</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
       <mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
       
         <!--- Note that these columns can be defined in any order.
@@ -11,30 +21,30 @@
       
         <!-- name Column -->
         <ng-container matColumnDef="name">
-          <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef i18n> {{ t('name') }} </mat-header-cell>
           <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
         </ng-container>
       
         <!-- email Column -->
         <ng-container matColumnDef="email">
-          <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef i18n> {{ t('email') }}</mat-header-cell>
           <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
         </ng-container>
       
         <!-- phone Column -->
         <ng-container matColumnDef="phone">
-          <mat-header-cell *matHeaderCellDef> Phone </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef i18n>  {{ t('phone') }}</mat-header-cell>
           <mat-cell *matCellDef="let element"> {{element.phone}} </mat-cell>
         </ng-container>
       
         <!-- website Column -->
-        <ng-container matColumnDef="address">
-          <mat-header-cell *matHeaderCellDef> Address </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.address.street}} </mat-cell>
+        <ng-container matColumnDef="address" i18n>
+          <mat-header-cell *matHeaderCellDef> {{ t('address') }}</mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.address?.street}} </mat-cell>
         </ng-container>
       
         <ng-container matColumnDef="action">
-          <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef i18n>  {{ t('action') }}</mat-header-cell>
           <mat-cell *matCellDef="let element">
             <button mat-raised-button (click)="AddeditUser(element)">Details</button>
           </mat-cell>

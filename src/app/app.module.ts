@@ -14,7 +14,14 @@ import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatSelectModule} from '@angular/material/select';
+import { httpLoader } from "./http-loader";
 
+import {
+  TRANSLOCO_CONFIG,
+  TranslocoConfig,
+  TranslocoModule
+} from "@ngneat/transloco";
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,9 +39,22 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     FormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatSelectModule,
+    TranslocoModule
   ],
-  providers: [],
+  providers: [
+    httpLoader,
+    {
+      provide: TRANSLOCO_CONFIG,
+      useValue: {
+        availableLangs: ["en", "es","eh"],
+        reRenderOnLangChange: true,
+        fallbackLang: "es",
+        defaultLang: "en"
+      } as TranslocoConfig
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

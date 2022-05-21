@@ -5,6 +5,7 @@ import { merge } from 'rxjs';
 import { UserService } from './services/user.service';
 import { UserDialogComponent } from './user-dialog/user-dialog.component';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { TranslocoService } from '@ngneat/transloco';
 
 @Component({
   selector: 'app-root',
@@ -17,12 +18,12 @@ export class AppComponent {
   dataSource:any;
   user:any;
 
-  users: any[] = [];
 
   constructor(
     private userService: UserService,
     public dialog: MatDialog,
-    private snackBar:MatSnackBar
+    private snackBar:MatSnackBar,
+    private LangService: TranslocoService
   ) {}
 
   ngOnInit() {
@@ -32,13 +33,12 @@ export class AppComponent {
   getUsers(){
     this.userService.getUsers()
     .subscribe((users:any) => {
-      this.users = users;
+      // If Local server
+      // this.dataSource = new MatTableDataSource(users.data); 
+
+      // If Public API
       this.dataSource = new MatTableDataSource(users);
     });
-  }
-
-  addItem() {
-    this.dataSource = new MatTableDataSource(this.users);
   }
 
   AddeditUser(user:any) {
@@ -51,10 +51,15 @@ export class AppComponent {
       console.log('result -', result);
       if (result.action == 'add') {
         this.userService.setUser(result.data)
-        .subscribe(res => {
-          console.log('res >>>', res);
-          this.getUsers();
-          this.snackBar.open('User Created Successfully', undefined, { duration: 1000 });
+        .subscribe((res:any) => {
+          if(res.status ==1) {
+            console.log('res >>>', res);
+            this.getUsers();
+            this.snackBar.open('User Created Successfully', undefined, { duration: 1000 });
+          } else {
+
+            this.snackBar.open(res, undefined, { duration: 2000 });
+          }
         })
       } else {
         this.user = result.data;
@@ -64,5 +69,8 @@ export class AppComponent {
       this.snackBar.open(err, undefined, { duration: 1000 });
     });
   }
-
+  changeLang(lang: any) {
+    console.log('laneg, lang', lang)
+    this.LangService.setActiveLang(lang.value);
+  }
 }

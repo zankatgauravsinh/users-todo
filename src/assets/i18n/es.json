@@ -1,0 +1,10 @@
+{
+    "header":"Usuario",
+    "btn":"Agregar usuario",
+    "language":"Elija un idioma",
+    "name":"Nombre",
+    "email":"Correo electrónico",
+    "phone":"Teléfono",
+    "address":"Dirección",
+    "action":"Acción"
+}
